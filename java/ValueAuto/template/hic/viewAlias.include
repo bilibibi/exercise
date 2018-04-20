@@ -1,0 +1,8 @@
+<#include "/ftl.include">
+<#assign view=model>
+<#assign table=view.table>
+<#include "/xmlns.include">
+<#assign component=view.fieldControlTypeMap>
+<#assign className=view.asName?cap_first>
+<#assign classNameLower=view.asName?uncap_first>
+<#assign moduleNameLower=view.moduleName?uncap_first>

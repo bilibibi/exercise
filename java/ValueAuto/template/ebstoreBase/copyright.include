@@ -1,0 +1,17 @@
+/* 
+ * ${className}
+ *
+ * Copyright (c) 2009 Hangzhou ValueSoft Inc., All rights reserved.
+ *
+ * This software is the confidential and proprietary information of
+ * ValueSoft Company. ("Confidential Information").  You shall not
+ * disclose such Confidential Information and shall use it only in
+ * accordance with the terms of the license agreement you entered into
+ * with ValueSoft.com.
+ * 
+ * Revision History
+ * Date      		Programmer       Notes
+ * ${date}   	    ${user}		     Initial
+ **********************************************************************
+*/
+<#include "/ftl.include">

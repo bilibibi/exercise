@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<#include "/moduleAlias.include">
+<#include "/xml_copyright.include">
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:flex="http://www.springframework.org/schema/flex"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:p="http://www.springframework.org/schema/p" 
+	   xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/flex
+		    http://www.springframework.org/schema/flex/spring-flex-1.0.xsd" 
+		xmlns:jee="http://www.springframework.org/schema/jee" 
+		xmlns:tx="http://www.springframework.org/schema/tx" 
+		xmlns:aop="http://www.springframework.org/schema/aop">
+  
+  
+  <!-- ===============================Service Layer===================================== -->
+   <#macro showService tables>
+    <#if tables?has_content>
+        <#list tables as table>
+            <#if table.moduleName?uncap_first==moduleNameFirstLower>
+    <#assign className=table.className>
+    <#assign classNameFirstLower=table.classNameFirstLower>
+    <bean id="${classNameFirstLower}Service" class="${fullPackage}.service.impl.${className}ServiceImpl">
+  	 <property name="daoRouter" ref="daoRouterMysql"/> 
+  	 <flex:remoting-destination />
+    </bean>
+            </#if>
+            <#if table.oneToMany?exists>
+                <@showService tables=table.oneToMany/>
+            </#if>
+        </#list>
+    </#if>
+  </#macro>
+  <@showService tables=tables/>
+
+</beans>

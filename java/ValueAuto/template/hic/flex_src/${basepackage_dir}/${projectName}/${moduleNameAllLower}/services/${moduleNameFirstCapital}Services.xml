@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<#include "/moduleAlias.include">
+
+<cairngorm:ServiceLocator 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:cairngorm="com.universalmind.cairngorm.business.*">
+
+    <mx:Script>
+    	<![CDATA[
+    		import mx.controls.Alert;
+    	]]>
+    </mx:Script>
+    
+    <#list tables as table>
+    <#assign classNameFirstLower=table.classNameFirstLower>
+		<mx:RemoteObject
+    	id="${classNameFirstLower}Service"
+    	destination="${classNameFirstLower}Service"
+		showBusyCursor="true" fault="mx.controls.Alert.show(event.fault.message);">
+        </mx:RemoteObject> 
+	</#list>         
+
+</cairngorm:ServiceLocator>

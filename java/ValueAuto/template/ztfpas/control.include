@@ -1,0 +1,27 @@
+<#macro choiceControl control name>
+	<#if control.type='text'>
+		<@text id=control.fieldJavaNameLower name=name/>
+	<#elseif control.type='radio'>
+		<@radio name=name itemLabel=control.itemLabel/>
+	<#elseif control.type='select'>
+		<@select id=control.dataSource+""+control.fieldJavaNameLower name=name/>
+	</#if>
+</#macro>
+
+<#macro text id name  ><input type="test" class="text" name="${name}" id="${id}" value="<@DollarSign/>{(${name})!""}"/></#macro>
+
+<#macro radio name  itemLabel >
+<#list itemLabel as item>
+<#if item_index=0>
+<input type="radio" name="${name}" value ="${item}" <<@WellNo/>if (!(${name})??)||((${name})??&&${name}='${item}')>checked</<@WellNo/>if> >${item}
+<#else>
+<input type="radio" name="${name}" value ="${item}" <<@WellNo/>if ((${name})??&&${name}='${item}')>checked</<@WellNo/>if> >${item}
+</#if>
+</#list>
+</#macro>
+
+<#macro select id name>
+	<select name="${name}" id="${id}">
+	</select>
+</#macro>
+

@@ -1,0 +1,31 @@
+<#macro choiceControl control hasValue>
+	<#if control.type='text'>
+		<@text control=control hasValue=hasValue/>
+	<#elseif control.type='textArea'>
+		<@textArea control=control hasValue=hasValue/>
+	<#elseif control.type='label'>
+		<@label control=control hasValue=hasValue/>
+	</#if>
+</#macro>
+
+<#macro text control hasValue>
+		<control:TextInput labelText="{localizator.getText('${control.fieldJavaName?uncap_first}')}"
+						   <#if control.isInt>restrict="0-9"</#if>
+						   id="${control.name}"
+	   <#if control.ifNull>request="true"</#if>
+	 <#if hasValue=="true">inputText="{${classNameLower}VO.${control.name}}"</#if>
+						   />
+</#macro>
+<#macro label control hasValue>
+		<control:Label labelText="{localizator.getText('${control.fieldJavaName?uncap_first}')}"
+					   id="${control.name}"
+					   <#if hasValue=="true">inputText="{${classNameLower}VO.${control.name}}"</#if>/>
+</#macro>
+<#macro textArea control hasValue>
+	<control:TextArea labelText="{localizator.getText('${control.fieldJavaName?uncap_first}')}"
+					  currentState="fourColumn"
+    				  id="${control.name}"
+<#if hasValue=="true">inputText="{${classNameLower}VO.${control.name}}"</#if>/>
+</#macro>
+
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+	<database>
+		<table tableName="prod_refund" key="id" moduleName="prod"/>
+	</database>
+    <module moduleName="prod">
+        <tables>
+            <table tableName="prod_refund"/>
+        </tables>
+    </module>
+</project>

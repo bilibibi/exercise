@@ -1,0 +1,14 @@
+<#assign module=model>
+<#assign fullPackage = basePackage+"."+projectName+"."+module.moduleNameAllLower>
+<#assign commonPackage = basePackage+"."+projectName+".common">
+<#assign moduleNameFirstCapital = module.moduleNameFirstCapital>
+<#assign moduleNameFirstLower = module.moduleNameFirstLower>
+<#assign moduleNameAllLower = module.moduleNameAllLower>
+<#assign className = moduleNameFirstCapital>
+<#assign classNameLower = moduleNameFirstLower>
+<#assign tables = module.tables>
+<#assign views = module.views>
+<#assign ajaxControls = module.ajaxControls >
+<#assign projectNameUpper = projectName?cap_first>
+<#assign commandXmlns = basePackage+"."+projectName+"."+model.moduleNameAllLower+".command">
+<#assign moduleXmlns = basePackage+"."+projectName+"."+model.moduleNameAllLower>

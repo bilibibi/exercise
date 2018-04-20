@@ -1,0 +1,36 @@
+<#macro getModuleName tableName tables>
+	<#list tables as table>
+		<#if table.tableName?upper_case==tableName?upper_case>
+			<#lt>${table.moduleNameAllLower}<#return/><#rt>
+		</#if>
+		 <#if table.oneToMany?exists>
+                <@getModuleName tableName=tableName tables=table.oneToMany/>
+         </#if>
+	</#list>
+</#macro>
+<#macro generateValidate control>
+	<#if control.ifNull>
+	if(ValidateUtil.validateNull(this.${control.name}.value)){
+		this.${control.name}.value.setFocus();
+		return ;
+	}
+	</#if>
+	<#if control.isInt>
+	if(ValidateUtil.validateNumber(this.${control.name}.value)){
+		this.${control.name}.value.setFocus();
+		return ;
+	}
+	</#if>
+	<#if control.isFloat>
+	if(ValidateUtil.validateFloat(this.${control.name}.value)){
+		this.${control.name}.value.setFocus();
+		return ;
+	}
+	</#if>
+	<#if control.isDate>
+	if(ValidateUtil.validateDate(this.${control.name}.value)){
+		this.${control.name}.value.setFocus();
+		return ;
+	}
+	</#if>
+</#macro>

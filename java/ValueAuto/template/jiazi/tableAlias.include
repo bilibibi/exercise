@@ -1,0 +1,7 @@
+<#assign table=model>
+<#include "/xmlns.include">
+<#assign fullPackage = basePackage+"."+projectName+"."+table.moduleNameAllLower>
+<#assign className=table.className>
+<#assign classNameLower=table.classNameFirstLower>
+<#assign moduleNameCaptital=table.moduleName?cap_first>
+<#assign moduleNameLower=table.moduleName?uncap_first>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<#include "/tableAlias.include">
+<#include "/xml_copyright.include"/>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="${className}">
+    <typeAlias alias="${classNameLower}VO" type="${fullPackage}.vo.${className}VO"/>
+    <resultMap id="${classNameLower}Result" class="${classNameLower}VO">
+        <#list table.fields as field>
+        <#if table.hasLinkField==false || field.javaNameLower!=table.linkField.javaNameLower>
+        <result property="${field.javaNameLower}" column="${field.sqlName}"/>
+        </#if>
+        </#list>
+        <#list table.oneToMany as many>
+        <result property="${many.classNameFirstLower}List" column="${table.key}" select="${many.moduleName?cap_first}_${many.tableNameFirstCapital}.loadByLinkKey"/>
+        </#list>
+    </resultMap>
+
+    <select id="load${className}" resultMap="${classNameLower}Result">
+        <![CDATA[
+            select * from `${table.tableName}`
+        ]]>
+    </select>
+
+    <insert id="insert${className}" parameterClass="${classNameLower}VO">
+    <![CDATA[
+        INSERT INTO `${table.tableName}` (
+        <#list table.fields as field>
+            <#if field.sqlName != table.keyField.sqlName && field.sqlName!='modified_date' && field.sqlName!='modified_by'>
+                ${field.sqlName} <#if field_has_next>,</#if>
+            </#if>
+        </#list>
+        )
+        VALUES(
+        <#list table.fields as field>
+             <#if field.sqlName != table.keyField.sqlName && field.sqlName!='modified_date' && field.sqlName!='modified_by'>
+                #${field.javaNameLower}# <#if field_has_next>,</#if>
+             </#if>
+        </#list>
+        )
+    ]]>
+        <selectKey resultClass="Long" keyProperty="id">
+            <![CDATA[ SELECT LAST_INSERT_ID() AS ID ]]>
+        </selectKey>
+    </insert>
+
+    <#if table.hasKeyField>
+    <#assign primaryName=table.keyField.sqlName>
+    <#assign primaryType=table.keyField.javaType>
+    <#assign primaryLabel=table.keyField.javaNameCapital>
+    <#assign primaryLabelLower=table.keyField.javaNameLower>
+
+    <update id="update${className}" parameterClass="${classNameLower}VO">
+    <![CDATA[
+        UPDATE `${table.tableName}`
+        SET
+            <#list table.fields as field>
+            <#if field.sqlName != primaryName && field.sqlName!='created_date' && field.sqlName!='created_by'>
+            ${field.sqlName} = #${field.javaNameLower}# <#if field_has_next>,</#if>
+            </#if>
+            </#list>
+        WHERE
+            ${primaryName} = #${primaryLabelLower}#
+    ]]>
+    </update>
+
+    <update id="delete${className}" parameterClass="${classNameLower}VO">
+        <![CDATA[
+            update `${table.tableName}` set data_status=0
+        ]]>
+    </update>
+    </#if>
+
+</sqlMap>

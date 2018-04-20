@@ -1,0 +1,10 @@
+<#macro getModuleName tableName tables>
+	<#list tables as table>
+		<#if table.tableName?upper_case==tableName?upper_case>
+			<#lt>${table.moduleNameAllLower}<#return/><#rt>
+		</#if>
+		 <#if table.oneToMany?exists>
+                <@getModuleName tableName=tableName tables=table.oneToMany/>
+         </#if>
+	</#list>
+</#macro>

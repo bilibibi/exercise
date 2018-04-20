@@ -1,0 +1,9 @@
+<#assign view=model>
+<#assign table=view.table>
+<#assign actionPackage = basePackage+".action."+table.moduleNameAllLower>
+<#assign voPackage = basePackage+".vo."+table.moduleNameAllLower>
+<#assign controls=view.fieldControlTypeMap>
+<#assign className=view.viewName?cap_first>
+<#assign classNameLower=view.viewName?uncap_first>
+<#assign moduleNameLower=view.moduleName?uncap_first>
+<#assign moduleChinaName=view.moduleChinaName>

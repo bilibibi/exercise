@@ -1,0 +1,7 @@
+<#assign table=model>
+<#assign actionPackage = basePackage+".action."+table.moduleNameAllLower>
+<#assign daoPackage = basePackage+".dao."+table.moduleNameAllLower>
+<#assign voPackage = basePackage+".vo."+table.moduleNameAllLower>
+<#assign className=table.tableNameFirstCapital>
+<#assign classNameLower=table.tableNameFirstLower>
+<#assign moduleNameCaptital=table.moduleName?cap_first>
