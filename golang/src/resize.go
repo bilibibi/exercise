@@ -1,4 +1,4 @@
-package resize
+package main
 
 import (
 	"image"
