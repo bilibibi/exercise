@@ -44,8 +44,37 @@ class Solution {
         return res;
     }
 
+    // offer:二维数组中的查找
+    public boolean find(int target, int[][] array) {
+        boolean hasTarget = false;
+        if (array != null) {
+            int x = array[0].length - 1;
+            int y = 0;
+            while (x >= 0 && y <= array.length - 1) {
+                if (array[y][x] == target) {
+                    hasTarget = true;
+                    break;
+                } else if (array[y][x] > target) {
+                    x--;
+                } else {
+                    y++;
+                }
+            }
+        }
+        return hasTarget;
+    }
+
     public static void main(String[] args) {
         Solution so = new Solution();
-        System.out.println(so.romanToInt("III"));
+
+        // romanToInt
+        // System.out.println(so.romanToInt("III"));
+
+        // find
+        int[][] array = new int[][]{
+                {1,2,8,9},
+                {4,7,10,13}
+        };
+        System.out.println(so.find(7, array));
     }
 }
