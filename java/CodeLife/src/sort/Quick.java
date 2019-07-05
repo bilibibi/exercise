@@ -1,3 +1,5 @@
+package sort;
+
 /**
 * 快速排序
 * 平均时间复杂度 O(nlogn)
