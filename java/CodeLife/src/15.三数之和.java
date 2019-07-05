@@ -1,5 +1,4 @@
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.util.*;
 
 /*
  * @lc app=leetcode.cn id=15 lang=java
