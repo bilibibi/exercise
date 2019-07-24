@@ -7,11 +7,11 @@ import java.util.*;
  */
 class Solution {
     public boolean wordPattern(String pattern, String str) {
-        char[] chars = pattern.toCharArray();
         String[] strs = str.split(" ");
-        if (chars.length != strs.length) {
+        if (pattern.length() != strs.length) {
             return false;
         }
+        char[] chars = pattern.toCharArray();
         Map<Character, String> map = new HashMap<>();
         // 保存str不重复的value
         Set<String> set = new HashSet<>();
