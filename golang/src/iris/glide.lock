@@ -1,0 +1,6 @@
+hash: 5aded602d8dd5f8c6074d3ec47e59e2a65da2782a784a6937cee7df9117d1038
+updated: 2019-11-11T18:57:55.363415+08:00
+imports:
+- name: github.com/kataras/iris
+  version: 797faeceddaf37b4d6699bb0cdbec78e51f60a0d
+testImports: []

@@ -1,0 +1,4 @@
+package: .
+import:
+- package: github.com/kataras/iris
+  version: v12.0.1
