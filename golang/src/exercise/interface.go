@@ -33,7 +33,7 @@ func main() {
 	p = person{"taozs", 18} //或者：&person{"taozs", 18}
 	p.Run()
 	fmt.Println(p.Name())
-	var p2 person = p.(person) //类型断言，接口类型断言到具体类型
+	var p2 = p.(person) //类型断言，接口类型断言到具体类型
 	fmt.Println(p2.name, p2.age)
 }
 

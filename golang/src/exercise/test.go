@@ -8,7 +8,121 @@ import (
 	"time"
 )
 
-func main() {
+func testArray() {
+	a := [...]int{1, 2, 3}
+	fmt.Println(a)
+
+	b := [2][3]int{{1, 2, 3}, {4, 5, 6}}
+	fmt.Println(b)
+
+	c := [...]int{4, 7, 1, 2, 5, 9, 8, 6, 3}
+	fmt.Println(c)
+
+	d := []int{4, 7, 1, 2, 5, 9, 8, 6, 3}
+	fmt.Println(d)
+
+	num := len(c)
+	for i := 0; i < num; i++ {
+		for j := i + 1; j < num; j++ {
+			if c[i] > c[j] {
+				c[j], c[i] = c[i], c[j]
+			}
+		}
+	}
+	fmt.Println(c)
+}
+
+func testBreak() {
+	for i := 0; i < 10; i++ {
+		fmt.Println("i = ", i)
+		for j := 0; j < 10; j++ {
+			if j == i {
+				fmt.Println("break")
+				break
+			}
+			fmt.Println("j = ", j)
+		}
+		fmt.Println("after break")
+	}
+}
+
+const (
+	B float64 = 1 << (iota * 10)
+	KB
+	MB
+	GB
+	TB
+)
+
+func testConst() {
+	fmt.Println(B)
+	fmt.Println(KB)
+	fmt.Println(MB)
+	fmt.Println(GB)
+	fmt.Println(TB)
+}
+
+func testDefer() {
+	var fs = [4]func(){}
+
+	for i := 0; i < 4; i++ {
+		defer fmt.Println("defer i = :", i)
+		defer func() { fmt.Println("defer_closure i = ", i) }()
+		fs[i] = func() {
+			fmt.Println("closure i = ", i)
+		}
+	}
+
+	for i, f := range fs {
+		fmt.Println("index : ", i)
+		f()
+	}
+}
+
+func testLabel() {
+	switch a := 3; {
+	case a > 2:
+		fmt.Println("a>2")
+		fallthrough
+	case a > 3:
+		fmt.Println("a>3")
+	default:
+		fmt.Println("default")
+	}
+
+LABEL:
+	for i := 0; i < 10; i++ {
+		for {
+			fmt.Println(i)
+			goto LABEL
+		}
+	}
+	fmt.Println("done")
+}
+
+func testMap() {
+	m1 := map[int]string{
+		1: "a", 2: "b", 3: "c",
+	}
+	fmt.Println(m1)
+
+	m2 := make(map[string]int)
+	for k, v := range m1 {
+		m2[v] = k
+	}
+	fmt.Println(m2)
+}
+
+func testOperator() {
+	a := 0
+	a = a | (1 << 3) // 在 bit3 上设置标志位 (从 bit0 开始算) a = a | (1 << 6)    // 在 bit6 上设置标志位
+	println(a)        // a = 72 = 0100 1000
+
+	a = a &^ (1 << 6) // 清除 bit6 上的标志位，a = 8 = 0000 0100
+	println(a)
+}
+
+func testTime() {
 	// TimeFormat := "2006-01-02 15:04:05"
 	// DateFormat := "2006-01-02"
 	// now := time.Now().Format(DateFormat)
@@ -71,5 +185,15 @@ func main() {
 	md5Ctx.Write([]byte(strconv.FormatInt(now2.Unix(), 10)))
 	cipherStr := md5Ctx.Sum(nil)
 	fmt.Println(hex.EncodeToString(cipherStr))
+}
 
+func main() {
+	//testArray()
+	//testBreak()
+	//testConst()
+	//testDefer()
+	testLabel()
+	testMap()
+	testOperator()
+	testTime()
 }
