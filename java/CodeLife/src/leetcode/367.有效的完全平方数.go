@@ -9,11 +9,22 @@ func isPerfectSquare(num int) bool {
 	if num < 1 {
 		return false
 	}
+
+	// 暴力循环
+	// i := 1
+	// for i * i < num {
+	// 	i++
+	// }
+	// return i*i==num
+
+	// 数学定理 (1 + 3 + 5 + ... + (2n - 1) = n ^ 2)
 	i := 1
-	for i * i < num {
-		i++
+	for num > 0 {
+		num -= i
+		i += 2
 	}
-	return i*i==num
+	return num == 0
+
 }
 // @lc code=end
 
