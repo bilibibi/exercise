@@ -14,17 +14,14 @@ func twoSum(numbers []int, target int) []int {
 	for left < right {
 		sum := numbers[left] + numbers[right]
 		if sum == target {
-			break
+			return []int{left + 1, right + 1}
 		} else if sum < target {
 			left++
 		} else {
 			right--
 		}
 	}
-	if left < right {
-		return []int{left + 1, right + 1}
-	}
-	return nil
+	return []int{-1, -1}
 }
 
 // @lc code=end
