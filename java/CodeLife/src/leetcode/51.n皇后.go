@@ -32,8 +32,15 @@ func solveNQueens(n int) [][]string {
 
 func backtrack(board [][]string, row int) {
 	if row == len(board) {
-		res = board
-		fmt.Println(res)
+		tmpa, tmps := make([]string, 0, len(board)), ""
+		for i := 0; i < len(board); i++ {
+			for j := 0; j < len(board[i]); j++ {
+				tmps += board[i][j]
+			}
+			tmpa = append(tmpa, tmps)
+			tmps = ""
+		}
+		res = append(res, tmpa)
 		return
 	}
 
@@ -44,14 +51,11 @@ func backtrack(board [][]string, row int) {
 		}
 		// 做选择
 		board[row][col] = "Q"
-		// fmt.Println("befor->", row, board)
 		// 进入下一行决策
 		backtrack(board, row+1)
 		// 撤销选择
 		board[row][col] = "."
-		// fmt.Println("after->", row, board)
 	}
-
 }
 
 func isValid(board [][]string, row, col int) bool {
@@ -82,5 +86,5 @@ func isValid(board [][]string, row, col int) bool {
 // @lc code=end
 
 func main() {
-	fmt.Println(solveNQueens(4))
+	fmt.Println(solveNQueens(1))
 }
